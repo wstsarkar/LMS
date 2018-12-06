@@ -1,14 +1,17 @@
 from tkinter import *
+from user import *
+from student import *
+from container import *
 
 
 class LoginFrame(Frame):
 
-    def __init__(self, master, controller):
+    def __init__(self, master, container):
         """ Initialize the Frame. """
 
         super(LoginFrame, self).__init__(master)
         self.master = master
-        self.controller = controller
+        self.container = container
 
         self.grid()
         self.create_widgets()
@@ -39,5 +42,8 @@ class LoginFrame(Frame):
         self.message_lbl.grid()
 
     def login(self, event):
-        self.message_lbl.config(text="Success")
-        self.controller.viewStudentForm()
+        for user in self.container.library.getAllUser():
+            if user.getUserName() == self.user_name_entry.get() and user.getPassword() == self.password_entry.get():
+                self.container.viewStudentListFrame()
+
+        self.message_lbl.config(text="Login Failed")

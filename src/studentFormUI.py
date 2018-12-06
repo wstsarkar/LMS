@@ -1,4 +1,5 @@
 from tkinter import *
+from student import Student
 
 
 class StudentFormFrame(Frame):
@@ -64,8 +65,20 @@ class StudentFormFrame(Frame):
         self.message_lbl.grid()
 
     def save(self, event):
-        self.controller.viewUserForm()
+        name = self.name_entry.get()
+        address = self.address.get()
+        phone_no = self.phone_no.get()
+        user_name = self.user_name.get()
+        password = self.password.get()
+        student = Student(name, address, phone_no, user_name, password)
+        self.controller.library.addStudent(student)
+        student = None
+
 
     def cancel(self, event):
-        self.controller.viewLogin()
+        self.name_entry.config(text="")
+        self.address.config(text="")
+        self.phone_no.config(text="")
+        self.user_name.config(text="")
+        self.password.config(text="")
 

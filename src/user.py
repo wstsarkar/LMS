@@ -3,7 +3,7 @@ class User(object):
     no_of_user = 0
 
     def __init__(self, name, address, phone_no, user_name, password):
-        User.no_of_customer += 1
+        User.no_of_user += 1
 
         self.name = name
         self.address = address

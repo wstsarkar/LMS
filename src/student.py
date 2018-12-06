@@ -1,3 +1,5 @@
+from book import *
+
 
 class Student(object):
     no_of_student = 0

@@ -1,3 +1,6 @@
+from book import *
+from user import *
+from student import *
 
 class Library(object):
 
@@ -38,16 +41,31 @@ class Library(object):
     def setBrunchName(self, brunch_name):
         self.brunch_name = brunch_name
 
-    def addEmployee(self, employee):
-        self.employees.append(employee)
+    def addBook(self, book):
+        self.books.append(book)
 
-    def removeEmployee(self, employee):
-        if employee in self.employees:
-            self.employees.remove(employee)
+    def deleteBook(self, book):
+        if book in self.books:
+            self.books.remove(book)
 
-    def addCustoemr(self, customer):
-        self.customers.append(customer)
+    def addUser(self, user):
+        self.users.append(user)
 
-    def removeCustomer(self, customer):
-        if customer in self.customers:
-            self.customers.remove(customer)
+    def deleteUser(self, user):
+        if user in self.users:
+            self.users.remove(user)
+
+    def addStudent(self, student):
+        self.students.append(student)
+
+    def deleteStudent(self, student):
+        if student in self.students:
+            self.student.remove(student)
+
+    def getAllUser(self):
+                return self.users
+    def getAllBook(self):
+        return self.books
+
+    def getAllStudent(self):
+        return self.students
