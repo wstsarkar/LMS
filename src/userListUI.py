@@ -27,7 +27,17 @@ class UserListFrame(Frame):
             Label(self, text=user.getNeme()).grid(row=row, column=0, sticky=W)
 
             Label(self, text=user.getAddress()).grid(row=row, column=1, sticky=W)
+
+            Button(self, text="Edit", command=lambda: self.deleteUser(user)).grid(row=row, column=1, sticky=W)
+
+            Button(self, text="Delete", command=lambda: self.deleteUser(user)).grid(row=row, column=1, sticky=W)
             row += 1
+
+    def deleteUser(self, user):
+        print(str(user.getNeme()))
+
+
+
     def getMainGeometry(self):
         return "300x400"
     def getMainTitle(self):

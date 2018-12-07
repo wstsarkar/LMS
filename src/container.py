@@ -3,6 +3,7 @@ from loginUI import *
 from studentFormUI import *
 from userFormUI import *
 from studentListUI import *
+from userListUI import *
 
 from library import *
 from user import *
@@ -48,10 +49,13 @@ class Container(object):
     def viewStudentListFrame(self):
         self.show_frame("StudentListFrame")
 
+    def viewUserListFrame(self):
+        self.show_frame("UserListFrame")
+
     def addFrame(self):
         self.frames = {}
 
-        for F in (LoginFrame, StudentFormFrame, UserFormFrame, StudentListFrame):
+        for F in (LoginFrame, StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame):
             page_name = F.__name__
             frame = F(self.root, self)
             self.frames[page_name] = frame
