@@ -12,15 +12,14 @@ class LoginFrame(Frame):
         super(LoginFrame, self).__init__(master)
         self.master = master
         self.container = container
-
         self.grid()
         self.create_widgets()
 
     def create_widgets(self):
-        """ Create login ui that do nothing. """
+        self.chk_state = BooleanVar()
 
-        self.user_check_btn = Checkbutton(self, text="Employee Login")
-        self.user_check_btn.grid()
+        self.is_employee_ck_btn = Checkbutton(self, text="Employee Login", var =self.chk_state)
+        self.is_employee_ck_btn.grid()
 
         self.user_name_lbl = Label(self, text="User Name")
         self.user_name_lbl.grid()
@@ -42,8 +41,19 @@ class LoginFrame(Frame):
         self.message_lbl.grid()
 
     def login(self, event):
-        for user in self.container.library.getAllUser():
-            if user.getUserName() == self.user_name_entry.get() and user.getPassword() == self.password_entry.get():
-                self.container.viewStudentListFrame()
+        print(self.chk_state.get())
+        if self.chk_state.get():
+            for user in self.container.library.getAllUser():
+                if user.getUserName() == self.user_name_entry.get() and user.getPassword() == self.password_entry.get():
+                    self.container.viewStudentListFrame()
+            self.message_lbl.config(text="Login Failed")
+        else:
+            for student in self.container.library.getAllStudent():
+                if student.getUserName() == self.user_name_entry.get() and student.getPassword() == self.password_entry.get():
+                    self.container.viewStudentListFrame()
+            self.message_lbl.config(text="Login Failed")
 
-        self.message_lbl.config(text="Login Failed")
+    def getMainGeometry(self):
+        return "200x400"
+    def getMainTitle(self):
+        return "Login Form"

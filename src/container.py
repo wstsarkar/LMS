@@ -12,25 +12,18 @@ class Container(object):
     def __init__(self):
 
         self.library = Library(name="Demo", brunch_name="Dhaka", address="DU", phone_no="01766539369")
-        user1 = User(name="User1", address="Address1", phone_no="Phone", user_name="admin", password= "admin")
-        user2 = User(name="User2", address="Address2", phone_no="Phone", user_name="admin", password= "admin")
+        user1 = User(name="User1", address="Address1", phone_no="Phone", user_name="admin", password="admin")
+        user2 = User(name="User2", address="Address2", phone_no="Phone", user_name="admin", password="admin")
+        student = Student(name="Stu1", address="Stu add 1", phone_no="Phone", user_name="stu", password="stu")
         self.library.addUser(user1)
         self.library.addUser(user2)
+        self.library.addStudent(student)
         user = None
         self.root = Tk()
         self.root.title(self.library.getNeme())
 
-        self.frames = {}
+        self.addFrame()
 
-        for F in (LoginFrame, StudentFormFrame, UserFormFrame,StudentListFrame):
-            page_name = F.__name__
-            frame = F(self.root, self)
-            self.frames[page_name] = frame
-
-            # put all of the pages in the same location;
-            # the one on the top of the stacking order
-            # will be the one that is visible.
-            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("LoginFrame")
 
@@ -40,6 +33,8 @@ class Container(object):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
         frame.tkraise()
+        self.root.geometry(frame.getMainGeometry())
+        self.root.title(frame.getMainTitle())
 
     def viewStudentForm(self):
         self.show_frame("StudentFormFrame")
@@ -53,8 +48,18 @@ class Container(object):
     def viewStudentListFrame(self):
         self.show_frame("StudentListFrame")
 
+    def addFrame(self):
+        self.frames = {}
 
+        for F in (LoginFrame, StudentFormFrame, UserFormFrame, StudentListFrame):
+            page_name = F.__name__
+            frame = F(self.root, self)
+            self.frames[page_name] = frame
 
+            # put all of the pages in the same location;
+            # the one on the top of the stacking order
+            # will be the one that is visible.
+            frame.grid(row=0, column=0, sticky="nsew")
 
 
 if __name__ == "__main__":
