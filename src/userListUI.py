@@ -1,14 +1,14 @@
 from tkinter import *
-from student import Student
+from user import *
 from container import *
 
 
-class StudentListFrame(Frame):
+class UserListFrame(Frame):
 
     def __init__(self, master, container):
         """ Initialize the Frame. """
 
-        super(StudentListFrame, self).__init__(master)
+        super(UserListFrame, self).__init__(master)
         self.master = master
         self.container = container
         self.container.root.title("List")
@@ -22,11 +22,11 @@ class StudentListFrame(Frame):
         Label(self, text="Name").grid(row=0, column=0, sticky=EW)
 
         Label(self, text="Address").grid(row=0, column=1, sticky=EW)
-        for student in self.container.library.getAllStudent():
+        for user in self.container.library.getAllUser():
 
-            Label(self, text=student.getNeme()).grid(row=row, column=0, sticky=W)
+            Label(self, text=user.getNeme()).grid(row=row, column=0, sticky=W)
 
-            Label(self, text=student.getAddress()).grid(row=row, column=1, sticky=W)
+            Label(self, text=user.getAddress()).grid(row=row, column=1, sticky=W)
             row += 1
     def getMainGeometry(self):
         return "300x400"

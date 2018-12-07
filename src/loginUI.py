@@ -18,7 +18,7 @@ class LoginFrame(Frame):
     def create_widgets(self):
         self.chk_state = BooleanVar()
 
-        self.is_employee_ck_btn = Checkbutton(self, text="Employee Login", var =self.chk_state)
+        self.is_employee_ck_btn = Checkbutton(self, text="Employee Login", var=self.chk_state)
         self.is_employee_ck_btn.grid()
 
         self.user_name_lbl = Label(self, text="User Name")
@@ -52,6 +52,7 @@ class LoginFrame(Frame):
                 if student.getUserName() == self.user_name_entry.get() and student.getPassword() == self.password_entry.get():
                     self.container.viewStudentListFrame()
             self.message_lbl.config(text="Login Failed")
+
 
     def getMainGeometry(self):
         return "200x400"
