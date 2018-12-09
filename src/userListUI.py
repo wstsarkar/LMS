@@ -1,3 +1,5 @@
+
+
 from tkinter import *
 from user import *
 from container import *
@@ -21,12 +23,22 @@ class UserListFrame(Frame):
         row = 1
         Label(self, text="Name").grid(row=0, column=0, sticky=EW)
 
-        Label(self, text="Address").grid(row=0, column=1, sticky=EW)
+        Label(self, text="User Name").grid(row=0, column=1, sticky=EW)
+
+        Label(self, text="Address").grid(row=0, column=2, sticky=EW)
+
+        Label(self, text="Phone No").grid(row=0, column=3, sticky=EW)
+
+
         for user in self.container.library.getAllUser():
 
             Label(self, text=user.getNeme()).grid(row=row, column=0, sticky=W)
 
-            Label(self, text=user.getAddress()).grid(row=row, column=1, sticky=W)
+            Label(self, text=user.getUserName()).grid(row=row, column=1, sticky=W)
+
+            Label(self, text=user.getAddress()).grid(row=row, column=2, sticky=W)
+
+            Label(self, text=user.getPhoneNo()).grid(row=row, column=3, sticky=W)
 
             Button(self, text="Edit", command=lambda: self.deleteUser(user)).grid(row=row, column=1, sticky=W)
 

@@ -13,48 +13,66 @@ class LoginFrame(Frame):
         self.master = master
         self.container = container
         self.grid()
-        self.create_widgets()
 
     def create_widgets(self):
+        for widget in self.winfo_children():
+            widget.destroy()
+
         self.chk_state = BooleanVar()
-
+        self.chk_state.set(True)
         self.is_employee_ck_btn = Checkbutton(self, text="Employee Login", var=self.chk_state)
-        self.is_employee_ck_btn.grid()
+        self.is_employee_ck_btn.grid(row=0, column=1, sticky=W)
 
-        self.user_name_lbl = Label(self, text="User Name")
-        self.user_name_lbl.grid()
+        self.user_name = Label(self, text="User Name")
+        self.user_name.grid(row=1, column=0, sticky=E)
 
         self.user_name_entry = Entry(self)
-        self.user_name_entry.grid()
+        self.user_name_entry.grid(row=1, column=1)
 
-        self.user_name_lbl = Label(self, text="Password")
-        self.user_name_lbl.grid()
+        self.password = Label(self, text="Password")
+        self.password.grid(row=2, column=0, sticky=E)
 
         self.password_entry = Entry(self)
-        self.password_entry.grid()
+        self.password_entry.grid(row=2, column=1)
 
-        self.login_btn = Button(self, text="Login ")
-        self.login_btn.grid()
-        self.login_btn.bind('<Button-1>', self.login)
+        self.login_btn = Button(self, text="Login")
+        self.login_btn .grid(row=3, column=0, sticky=E)
+        self.login_btn .bind('<Button-1>', self.login)
+
+        self.cancel_btn = Button(self, text="Clear")
+        self.cancel_btn.grid(row=3, column=1, sticky=E)
+        self.cancel_btn.bind('<Button-1>', self.clear)
 
         self.message_lbl = Label(self, text="")
-        self.message_lbl.grid()
+        self.message_lbl.grid(row=4, column=1, sticky=W)
+
 
     def login(self, event):
         print(self.chk_state.get())
         if self.chk_state.get():
             for user in self.container.library.getAllUser():
-                if user.getUserName() == self.user_name_entry.get() and user.getPassword() == self.password_entry.get():
-                    self.container.viewUserListFrame()
+                if user.getUserName().upper() == self.user_name_entry.get().upper() and user.getPassword() == self.password_entry.get():
+                    self.clearForm()
+                    self.container.viewMenu(isEmp=True)
             self.message_lbl.config(text="Login Failed")
         else:
             for student in self.container.library.getAllStudent():
-                if student.getUserName() == self.user_name_entry.get() and student.getPassword() == self.password_entry.get():
-                    self.container.viewStudentListFrame()
+                if student.getUserName().upper() == self.user_name_entry.get().upper() and student.getPassword() == self.password_entry.get():
+                    self.clearForm()
+                    self.container.viewMenu(isEmp=False)
             self.message_lbl.config(text="Login Failed")
 
 
+    def clear(self,event):
+        self.clearForm()
+
+    def clearForm(self):
+        self.user_name_entry.delete(0, 'end')
+        self.password_entry.delete(0, 'end')
+        self.user_name_entry.focus()
+
+
     def getMainGeometry(self):
-        return "200x400"
+        return "280x200"
     def getMainTitle(self):
         return "Login Form"

@@ -13,18 +13,131 @@ class MenuFrame(Frame):
         self.master = master
         self.container = container
         self.grid()
-        self.create_widgets()
+
+        # self.create_user_widgets()
 
     def create_widgets(self):
-        self.login_btn = Button(self, text="Student List")
-        self.login_btn.grid()
-        self.login_btn.bind('<Button-1>', self.login)
+        if self.container.isEmployee:
+            self.create_user_widgets()
+        else:
+            self.create_student_widgets()
 
-    def login(self, event):
-        self.message_lbl.config(text="Login Failed")
+    def create_user_widgets(self):
+        self.logout_btn = Button(self, text="Logout")
+        self.logout_btn.grid(row=0, column=1, sticky=E)
+        self.logout_btn.bind('<Button-1>', self.logout)
+
+
+        self.book_list_btn = Button(self, text="Book List")
+        self.book_list_btn.grid(sticky=E+W)
+        self.book_list_btn.bind('<Button-1>', self.gotoBookList)
+
+        self.book_form_btn = Button(self, text="Add Book")
+        self.book_form_btn.grid(sticky=E+W)
+        self.book_form_btn.bind('<Button-1>', self.gotoBookForm)
+
+        self.student_list_btn = Button(self, text="Student List")
+        self.student_list_btn.grid(sticky=E+W)
+        self.student_list_btn.bind('<Button-1>', self.gotoStudentList)
+
+        self.student_form_btn = Button(self, text="Add Student")
+        self.student_form_btn.grid(sticky=E+W)
+        self.student_form_btn.bind('<Button-1>', self.gotoStudentForm)
+
+        self.emp_list_btn = Button(self, text="Employee List")
+        self.emp_list_btn.grid(sticky=E+W)
+        self.emp_list_btn.bind('<Button-1>', self.gotoEmpList)
+
+        self.emp_form_btn = Button(self, text="Add Employee")
+        self.emp_form_btn.grid(sticky=E+W)
+        self.emp_form_btn.bind('<Button-1>', self.gotoEmpForm)
+
+        self.borrow_list_btn = Button(self, text="Book Borrow List")
+        self.borrow_list_btn.grid(sticky=E+W)
+        self.borrow_list_btn.bind('<Button-1>', self.gotoBorrowList)
+
+        self.borrow_form_btn = Button(self, text="Book Borrow")
+        self.borrow_form_btn.grid(sticky=E+W)
+        self.borrow_form_btn.bind('<Button-1>', self.gotoBorrowForm)
+
+        self.return_list_btn = Button(self, text="Book Return List")
+        self.return_list_btn.grid(sticky=E+W)
+        self.return_list_btn.bind('<Button-1>', self.gotoReturnList)
+
+        self.return_form_btn = Button(self, text="Book Return")
+        self.return_form_btn.grid(sticky=E+W)
+        self.return_form_btn.bind('<Button-1>', self.gotoReturnForm)
+
+
+    def create_student_widgets(self):
+
+        self.logout_btn = Button(self, text="Logout")
+        self.logout_btn.grid(row=0, column=1, sticky=E)
+        self.logout_btn.bind('<Button-1>', self.logout)
+
+
+        self.book_list_btn = Button(self, text="Book List")
+        self.book_list_btn.grid(sticky=E+W)
+        self.book_list_btn.bind('<Button-1>', self.gotoBookList)
+
+        self.borrow_list_btn = Button(self, text="Borrow List")
+        self.borrow_list_btn.grid(sticky=E+W)
+        self.borrow_list_btn.bind('<Button-1>', self.gotoBorrowList)
+
+        self.borrow_form_btn = Button(self, text="Borrow")
+        self.borrow_form_btn.grid(sticky=E+W)
+        self.borrow_form_btn.bind('<Button-1>', self.gotoBorrowForm)
+
+
+    def logout(self, event):
+        for widget in self.winfo_children():
+            widget.destroy()
+        self.container.viewLogin()
+
+
+
+
+
+    def gotoBookList(self, event):
+        self.container.viewBookList()
+
+    def gotoBookForm(self, event):
+        self.container.viewBookFormFrame()
+
+    def gotoStudentList(self, event):
+        self.container.viewStudentListFrame()
+
+    def gotoStudentForm(self, event):
+        self.container.viewStudentForm()
+
+    def gotoEmpList(self, event):
+        self.container.viewUserListFrame()
+
+    def gotoEmpForm(self, event):
+        self.container.viewUserForm()
+
+    def gotoBorrowList(self, event):
+        self.container.viewBorrowList()
+
+    def gotoBorrowForm(self, event):
+        self.container.viewBorrowForm()
+
+    def gotoReturnList(self, event):
+        self.container.viewReturnList()
+
+    def gotoReturnForm(self, event):
+        self.container.viewReturnForm()
+
+
+
+
+
+
+
+
 
 
     def getMainGeometry(self):
-        return "200x400"
+        return "240x320"
     def getMainTitle(self):
-        return "Login Form"
+        return "Menu"

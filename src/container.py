@@ -4,6 +4,9 @@ from studentFormUI import *
 from userFormUI import *
 from studentListUI import *
 from userListUI import *
+from menuUI import *
+from bookListUI import *
+from bookUI import *
 
 from library import *
 from user import *
@@ -19,7 +22,7 @@ class Container(object):
         self.library.addUser(user1)
         self.library.addUser(user2)
         self.library.addStudent(student)
-        user = None
+        self.isEmployee = True
         self.root = Tk()
         self.root.title(self.library.getNeme())
 
@@ -33,29 +36,56 @@ class Container(object):
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
+        frame.create_widgets()
         frame.tkraise()
         self.root.geometry(frame.getMainGeometry())
         self.root.title(frame.getMainTitle())
 
-    def viewStudentForm(self):
-        self.show_frame("StudentFormFrame")
 
     def viewLogin(self):
         self.show_frame("LoginFrame")
 
-    def viewUserForm(self):
-        self.show_frame("UserFormFrame")
+    def viewMenu(self, isEmp):
+        self.isEmployee = isEmp
+        self.show_frame("MenuFrame")
+
+    def viewBookList(self):
+        self.show_frame("BookListFrame")
+
+    def viewBookFormFrame(self):
+        self.show_frame("BookFormFrame")
+
 
     def viewStudentListFrame(self):
         self.show_frame("StudentListFrame")
 
+    def viewStudentForm(self):
+        self.show_frame("StudentFormFrame")
+
+
     def viewUserListFrame(self):
         self.show_frame("UserListFrame")
+
+    def viewUserForm(self):
+        self.show_frame("UserFormFrame")
+
+    def viewBorrowList(self):
+        self.show_frame("UserFormFrame")
+
+    def viewBorrowForm(self):
+        self.show_frame("UserFormFrame")
+
+    def viewBorrowForm(self):
+        self.show_frame("UserFormFrame")
+    def viewBorrowForm(self):
+        self.show_frame("UserFormFrame")
+
+
 
     def addFrame(self):
         self.frames = {}
 
-        for F in (LoginFrame, StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame):
+        for F in (LoginFrame, MenuFrame,BookListFrame,BookFormFrame, StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame):
             page_name = F.__name__
             frame = F(self.root, self)
             self.frames[page_name] = frame
