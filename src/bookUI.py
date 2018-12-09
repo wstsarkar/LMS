@@ -1,4 +1,5 @@
 from tkinter import *
+from book import *
 
 
 # from student import Student
@@ -43,8 +44,8 @@ class BookFormFrame(Frame):
         self.version_lbl = Label(self, text="Version")
         self.version_lbl.grid(row=3, column=0, sticky=E)
 
-        self.verson_entry = Entry(self)
-        self.verson_entry.grid(row=3, column=1)
+        self.version_entry = Entry(self)
+        self.version_entry.grid(row=3, column=1)
 
         self.description_lbl = Label(self, text="Description")
         self.description_lbl.grid(row=4, column=0, sticky=E)
@@ -55,8 +56,8 @@ class BookFormFrame(Frame):
         self.stock_lbl = Label(self, text="Stock")
         self.stock_lbl.grid(row=5, column=0, sticky=E)
 
-        self.stock_lbl_entry = Entry(self)
-        self.stock_lbl_entry.grid(row=5, column=1)
+        self.stock_entry = Entry(self)
+        self.stock_entry.grid(row=5, column=1)
 
         self.blank = Label(self, text="")
         self.blank.grid(row=6)
@@ -73,10 +74,21 @@ class BookFormFrame(Frame):
         self.message_lbl.grid()
 
     def save(self, event):
-        print("Save button Clicked")
+
+        title = self.title_entry.get()
+        author = self.author_name_entry.get()
+        category = self.category_entry.get()
+        version = self.version_entry.get()
+        description = self.description_entry.get()
+        in_stock = self.stock_entry.get()
+
+        self.container.library.addBook(Book(title, author, category, version, description, in_stock))
+        self.container.viewMenu(self.container.isEmployee)
+
 
     def cancel(self, event):
-        print("Cancel button Clicked")
+        self.container.viewMenu(self.container.isEmployee)
+
 
 
 

@@ -7,6 +7,7 @@ from userListUI import *
 from menuUI import *
 from bookListUI import *
 from bookUI import *
+from borrowBookListUI import *
 
 from library import *
 from user import *
@@ -16,9 +17,10 @@ class Container(object):
     def __init__(self):
 
         self.library = Library(name="Demo", brunch_name="Dhaka", address="DU", phone_no="01766539369")
-        user1 = User(name="User1", address="Address1", phone_no="Phone", user_name="admin", password="admin")
-        user2 = User(name="User2", address="Address2", phone_no="Phone", user_name="admin", password="admin")
+        user1 = User(name="User1", address="Address1", phone_no="Phone", user_name="b", password="b")
+        user2 = User(name="User2", address="Address2", phone_no="Phone", user_name="a", password="a")
         student = Student(name="Stu1", address="Stu add 1", phone_no="Phone", user_name="stu", password="stu")
+
         self.library.addUser(user1)
         self.library.addUser(user2)
         self.library.addStudent(student)
@@ -70,14 +72,14 @@ class Container(object):
         self.show_frame("UserFormFrame")
 
     def viewBorrowList(self):
-        self.show_frame("UserFormFrame")
+        self.show_frame("BorrowBookListFrame")
 
     def viewBorrowForm(self):
         self.show_frame("UserFormFrame")
 
-    def viewBorrowForm(self):
+    def viewReturnForm(self):
         self.show_frame("UserFormFrame")
-    def viewBorrowForm(self):
+    def viewReturnForm(self):
         self.show_frame("UserFormFrame")
 
 
@@ -85,7 +87,7 @@ class Container(object):
     def addFrame(self):
         self.frames = {}
 
-        for F in (LoginFrame, MenuFrame,BookListFrame,BookFormFrame, StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame):
+        for F in (LoginFrame, MenuFrame, BookListFrame, BookFormFrame, StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame, BorrowBookListFrame):
             page_name = F.__name__
             frame = F(self.root, self)
             self.frames[page_name] = frame

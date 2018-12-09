@@ -4,12 +4,12 @@ from book import *
 from container import *
 
 
-class BookListFrame(Frame):
+class BorrowBookListFrame(Frame):
 
     def __init__(self, master, container):
         """ Initialize the Frame. """
 
-        super(BookListFrame, self).__init__(master)
+        super(BorrowBookListFrame, self).__init__(master)
         self.master = master
         self.container = container
 
@@ -37,6 +37,17 @@ class BookListFrame(Frame):
             self.add_book_btn.grid(row=1, column=0, sticky=W)
             self.add_book_btn.bind('<Button-1>', self.gotoBookForm)
             row = 2
+
+        self.tkvar = StringVar(self.master)
+        # link function to change dropdown
+        self.tkvar.trace('w', self.change_dropdown)
+
+        # Dictionary with options
+        self.tkvar.set('Select One') # set the default option
+
+        popupMenu = OptionMenu(self, self.tkvar, *self.container.library.getStudentDropDown())
+
+        popupMenu.grid(row=1, column=1)
 
 
 
@@ -73,6 +84,9 @@ class BookListFrame(Frame):
             if self.container.isEmployee:
                 Button(self, text="Edit").grid(row=row, column=6, sticky=EW)
                 Button(self, text="Delete").grid(row=row, column=7, sticky=EW)
+
+    def change_dropdown(self, *args):
+        print(self.tkvar.get())
 
 
     def gotoBookForm(self, event):

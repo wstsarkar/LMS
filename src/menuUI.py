@@ -17,16 +17,20 @@ class MenuFrame(Frame):
         # self.create_user_widgets()
 
     def create_widgets(self):
+
+        for widget in self.winfo_children():
+            widget.destroy()
+
+        self.logout_btn = Button(self, text="Logout")
+        self.logout_btn.grid(row=0, column=0, sticky=E)
+        self.logout_btn.bind('<Button-1>', self.logout)
+
         if self.container.isEmployee:
             self.create_user_widgets()
         else:
             self.create_student_widgets()
 
     def create_user_widgets(self):
-        self.logout_btn = Button(self, text="Logout")
-        self.logout_btn.grid(row=0, column=1, sticky=E)
-        self.logout_btn.bind('<Button-1>', self.logout)
-
 
         self.book_list_btn = Button(self, text="Book List")
         self.book_list_btn.grid(sticky=E+W)
@@ -71,11 +75,6 @@ class MenuFrame(Frame):
 
     def create_student_widgets(self):
 
-        self.logout_btn = Button(self, text="Logout")
-        self.logout_btn.grid(row=0, column=1, sticky=E)
-        self.logout_btn.bind('<Button-1>', self.logout)
-
-
         self.book_list_btn = Button(self, text="Book List")
         self.book_list_btn.grid(sticky=E+W)
         self.book_list_btn.bind('<Button-1>', self.gotoBookList)
@@ -90,8 +89,6 @@ class MenuFrame(Frame):
 
 
     def logout(self, event):
-        for widget in self.winfo_children():
-            widget.destroy()
         self.container.viewLogin()
 
 
@@ -138,6 +135,6 @@ class MenuFrame(Frame):
 
 
     def getMainGeometry(self):
-        return "240x320"
+        return "200x350"
     def getMainTitle(self):
         return "Menu"

@@ -4,12 +4,12 @@ from book import *
 from container import *
 
 
-class BookListFrame(Frame):
+class ReturnBookFrame(Frame):
 
     def __init__(self, master, container):
         """ Initialize the Frame. """
 
-        super(BookListFrame, self).__init__(master)
+        super(ReturnBookFrame, self).__init__(master)
         self.master = master
         self.container = container
 

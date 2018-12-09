@@ -69,3 +69,11 @@ class Library(object):
 
     def getAllStudent(self):
         return self.students
+
+
+    def getStudentDropDown(self):
+        temp=[]
+        temp.append("Select One")
+        for student in self.students:
+            temp.append(student.getNeme())
+        return temp
