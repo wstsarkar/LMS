@@ -10,7 +10,7 @@ class Book(object):
         self.category = category
         self.version = version
         self.description = description
-        self.in_stock = in_stock
+        self.in_stock = int(in_stock)
         self.count = in_stock
 
     def getTitle(self):
@@ -43,11 +43,17 @@ class Book(object):
     def setDescription(self, description):
         self.description = description
 
-    def setCount(self,count):
-        self.count = count
+    def setCount(self, count):
+        self.count = int(count)
 
     def getCount(self):
-        return  self.count
+        return self.count
+
+    def setInStock(self, in_stock):
+        self.in_stock = int(in_stock)
+
+    def getInStock(self):
+        return self.in_stock
 
     def borrowedBook(self):
         if self.in_stock > 0:

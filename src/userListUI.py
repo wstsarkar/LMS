@@ -1,5 +1,4 @@
 
-
 from tkinter import *
 from user import *
 from container import *
@@ -46,9 +45,10 @@ class UserListFrame(Frame):
 
         Label(self, text="Action").grid(row=row, column=4, columnspan=2, sticky=EW)
 
-
         for user in self.container.library.getAllUser():
 
+            index = self.container.library.getUserIndex(user)
+            print(index)
             row += 1
 
             Label(self, text=user.getNeme()).grid(row=row, column=0, sticky=W)
@@ -59,12 +59,17 @@ class UserListFrame(Frame):
 
             Label(self, text=user.getPhoneNo()).grid(row=row, column=3, sticky=W)
 
-            Button(self, text="Edit", command=lambda: self.deleteUser(user)).grid(row=row, column=4, sticky=W)
+            Button(self, text="Edit", command=lambda user=user: self.EditUser(user)).grid(row=row, column=4, sticky=W)
 
-            Button(self, text="Delete", command=lambda: self.deleteUser(user)).grid(row=row, column=5, sticky=W)
+            Button(self, text="Delete", command=lambda user=user: self.DeleteUser(user)).grid(row=row, column=5, sticky=W)
 
-    def deleteUser(self, user):
+
+    def EditUser(self, user):
         print(str(user.getNeme()))
+
+    def DeleteUser(self, user):
+        self.container.library.deleteUser(user)
+        self.create_widgets()
 
 
 
@@ -82,4 +87,3 @@ class UserListFrame(Frame):
         return "470x400"
     def getMainTitle(self):
         return "User List"
-

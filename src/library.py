@@ -63,7 +63,27 @@ class Library(object):
             self.student.remove(student)
 
     def getAllUser(self):
-                return self.users
+        return self.users
+
+    def getUserIndex(self, user):
+        return self.users.index(user)
+
+    def getUserByIndex(self, index):
+        user = self.users[index]
+        return user
+
+    def getStudentByName(self, name):
+        for student in self.students:
+            if student.getNeme() == name:
+                return student
+        return None
+
+    def getStudentIndexByName(self, name):
+        for student in self.students:
+            if student.getNeme() == name:
+                return self.students.index(student)
+        return -1
+
     def getAllBook(self):
         return self.books
 

@@ -48,9 +48,9 @@ class Student(object):
         self.password = password
 
     def borrowBook(self, book):
-        if book not in self.currebtBorrowList:
+        if book not in self.currentBorrowList:
             self.currentBorrowList.append(book)
-            self.alltBorrowList.append(book)
+            self.allBorrowList.append(book)
             book.borrowedBook()
             return True
         else:
@@ -66,8 +66,12 @@ class Student(object):
             return False
 
 
-    def getBorrowedList(self):
+    def getBorrowedCurrentList(self):
         return self.currebtBorrowList
+
+    def getBorrowedHistory(self):
+        return self.allReturnList
 
     def getReturnedList(self):
         return self.allReturnList
+

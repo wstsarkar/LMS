@@ -68,11 +68,11 @@ class BookListFrame(Frame):
 
             Label(self, text=book.getDescription()).grid(row=row, column=4, sticky=W)
 
-            Label(self, text=book.getCount()).grid(row=row, column=5, sticky=W)
+            Label(self, text=str(book.getInStock())).grid(row=row, column=5, sticky=W)
 
             if self.container.isEmployee:
-                Button(self, text="Edit").grid(row=row, column=6, sticky=EW)
-                Button(self, text="Delete").grid(row=row, column=7, sticky=EW)
+                Button(self, text="Edit", command=lambda b=book: self.EditBook(b)).grid(row=row, column=6, sticky=W)
+                Button(self, text="Delete", command=lambda b=book: self.DeleteBook(b)).grid(row=row, column=7, sticky=W)
 
 
     def gotoBookForm(self, event):
@@ -83,6 +83,15 @@ class BookListFrame(Frame):
 
     def back(self, event):
         self.container.viewMenu(self.container.isEmployee)
+
+    def EditBook(self, book):
+        print(str(book.getNeme()))
+
+    def DeleteBook(self, book):
+        self.container.library.deleteBook(book)
+        self.create_widgets()
+
+
 
     def getMainGeometry(self):
         if self.container.isEmployee:

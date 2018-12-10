@@ -57,8 +57,9 @@ class StudentListFrame(Frame):
 
             Label(self, text=student.getPhoneNo()).grid(row=row, column=3, sticky=W)
 
-            Button(self, text="Edit").grid(row=row, column=4, sticky=EW)
-            Button(self, text="Delete").grid(row=row, column=5, sticky=EW)
+            Button(self, text="Edit", command=lambda s=student: self.EditStudent(s)).grid(row=row, column=4, sticky=W)
+
+            Button(self, text="Delete", command=lambda s=student: self.DeleteStudent(s)).grid(row=row, column=5, sticky=W)
 
 
     def gotoStudentForm(self, event):
@@ -70,6 +71,12 @@ class StudentListFrame(Frame):
     def back(self, event):
         self.container.viewMenu(self.container.isEmployee)
 
+    def EditStudent(self, student):
+        print(str(student.getNeme()))
+
+    def DeleteStudent(self, student):
+        self.container.library.deleteStudent(student)
+        self.create_widgets()
 
 
     def getMainGeometry(self):

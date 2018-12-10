@@ -21,8 +21,6 @@ class BorrowBookFrame(Frame):
         for widget in self.winfo_children():
             widget.destroy()
 
-
-
         self.back_btn = Button(self, text="Back")
         self.back_btn.grid(row=0, column=0, sticky=W)
         self.back_btn.bind('<Button-1>', self.back)
@@ -32,13 +30,15 @@ class BorrowBookFrame(Frame):
         self.logout_btn.bind('<Button-1>', self.logout)
 
         row = 1
-        if self.container.isEmployee:
-            self.add_book_btn = Button(self, text="Add Book")
-            self.add_book_btn.grid(row=1, column=0, sticky=W)
-            self.add_book_btn.bind('<Button-1>', self.gotoBookForm)
-            row = 2
 
+        self.selectStudent = StringVar(self.master)
+        self.selectStudent.set('Select One')
 
+        selectStudentOM = OptionMenu(self, self.selectStudent, *self.container.library.getStudentDropDown())
+
+        selectStudentOM.grid(row=row, column=0, columnspan=3, sticky=W)
+
+        row = 2
 
         Label(self, text="Title").grid(row=row, column=0, sticky=EW)
 
@@ -52,8 +52,7 @@ class BorrowBookFrame(Frame):
 
         Label(self, text="Stock").grid(row=row, column=5, sticky=EW)
 
-        if self.container.isEmployee:
-            Label(self, text="Action").grid(row=row, column=6, columnspan=2, sticky=EW)
+        Label(self, text="Action").grid(row=row, column=6, columnspan=2, sticky=EW)
 
         for book in self.container.library.getAllBook():
 
@@ -68,12 +67,18 @@ class BorrowBookFrame(Frame):
 
             Label(self, text=book.getDescription()).grid(row=row, column=4, sticky=W)
 
-            Label(self, text=book.getCount()).grid(row=row, column=5, sticky=W)
+            Label(self, text=str(book.getInStock())).grid(row=row, column=5, sticky=W)
 
-            if self.container.isEmployee:
-                Button(self, text="Edit").grid(row=row, column=6, sticky=EW)
-                Button(self, text="Delete").grid(row=row, column=7, sticky=EW)
+            Button(self, text="Borrow", command=lambda book=book: self.BorrowBook(book)).grid(row=row, column=6, sticky=W)
 
+
+    def BorrowBook(self, book):
+
+        student_name = self.selectStudent.get()
+        if student_name != "Select One":
+            self.container.library.getStudentByName(student_name).borrowBook(book)
+
+        print(book.getTitle())
 
     def gotoBookForm(self, event):
         self.container.viewBookFormFrame()
