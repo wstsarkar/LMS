@@ -40,7 +40,7 @@ class LoginFrame(Frame):
         self.password = Label(self, text="Password")
         self.password.grid(row=7, column=0, sticky=E)
 
-        self.password_entry = Entry(self)
+        self.password_entry = Entry(self, show="*",)
         self.password_entry.grid(row=7, column=1)
 
         self.login_btn = Button(self, text="Login")

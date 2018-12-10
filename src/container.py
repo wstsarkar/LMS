@@ -20,10 +20,11 @@ class Container(object):
     def __init__(self):
 
         self.library = Library(name="Demo", brunch_name="Dhaka", address="DU", phone_no="01766539369")
-        user1 = User(name="User1", address="Address1", phone_no="Phone", user_name="b", password="b")
-        user2 = User(name="User2", address="Address2", phone_no="Phone", user_name="a", password="a")
+        user1 = User(name="Admin", address="Address1", phone_no="Phone", user_name="admin", password="admin")
+        user2 = User(name="Manager", address="Address2", phone_no="Phone", user_name="manager", password="manager")
         student = Student(name="Stu1", address="Stu add 1", phone_no="Phone", user_name="stu", password="stu")
-        book = Book(title = 'A', author ="a",category ="a", version ="A" ,description="A", in_stock=10)
+        student = Student(name="Stu2", address="Add 2", phone_no="Phone", user_name="stu", password="stu")
+        book = Book(title='A', author="a", category="a", version="A", description="A", in_stock=10)
 
         self.library.addUser(user1)
         self.library.addUser(user2)
