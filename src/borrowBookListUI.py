@@ -55,7 +55,7 @@ class BorrowBookListFrame(Frame):
     def viewList(self):
         for widget in self.winfo_children():
             grid_info = widget.grid_info()
-            if grid_info["row"] > 3:
+            if grid_info["row"] > 2:
                 widget.destroy()
         row = 3
         Label(self, width=10, text="Title").grid(row=row, column=0, sticky=EW)
@@ -70,13 +70,13 @@ class BorrowBookListFrame(Frame):
 
         Label(self, width=10, text="Stock").grid(row=row, column=5, sticky=EW)
 
-        if self.container.isEmployee:
+        if self.container.isEmployee and self.selectList.get() != "All List":
             Label(self, text="Action").grid(row=row, column=6, columnspan=2, sticky=EW)
 
         student_name = self.selectStudent.get()
         student = self.container.library.getStudentByName(student_name)
         if student:
-            list = student.allBorrowList if student_name == "All List" else student.currentBorrowList
+            list = student.allBorrowList if self.selectList.get() == "All List" else student.currentBorrowList
             if list:
                 for book in list:
 
@@ -93,11 +93,15 @@ class BorrowBookListFrame(Frame):
 
                     Label(self, text=str(book.getInStock())).grid(row=row, column=5, sticky=W)
 
-                    if self.container.isEmployee:
+                    if self.container.isEmployee and self.selectList.get() != "All List":
                         Button(self, text="Return", command=lambda book=book: self.ReturnBook(book)).grid(row=row, column=6, sticky=W)
 
     def ReturnBook(self, book):
-        print(book.getAuthor())
+        student_name = self.selectStudent.get()
+        if student_name != "Select One":
+            self.container.library.getStudentByName(student_name).returnBook(book)
+
+        self.viewList()
 
     def selectList_change(self, *args):
         self.viewList()

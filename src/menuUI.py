@@ -68,9 +68,6 @@ class MenuFrame(Frame):
         self.return_list_btn.grid(sticky=E+W)
         self.return_list_btn.bind('<Button-1>', self.gotoReturnList)
 
-        self.return_form_btn = Button(self, text="Book Return")
-        self.return_form_btn.grid(sticky=E+W)
-        self.return_form_btn.bind('<Button-1>', self.gotoReturnForm)
 
 
     def create_student_widgets(self):

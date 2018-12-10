@@ -38,6 +38,13 @@ class BorrowBookFrame(Frame):
 
         selectStudentOM.grid(row=row, column=0, columnspan=3, sticky=W)
 
+        self.ViewList()
+
+    def ViewList(self):
+        for widget in self.winfo_children():
+            grid_info = widget.grid_info()
+            if grid_info["row"] > 2:
+                widget.destroy()
         row = 2
 
         Label(self, text="Title").grid(row=row, column=0, sticky=EW)
@@ -78,7 +85,7 @@ class BorrowBookFrame(Frame):
         if student_name != "Select One":
             self.container.library.getStudentByName(student_name).borrowBook(book)
 
-        print(book.getTitle())
+        self.ViewList()
 
     def gotoBookForm(self, event):
         self.container.viewBookFormFrame()
