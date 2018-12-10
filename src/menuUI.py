@@ -80,9 +80,9 @@ class MenuFrame(Frame):
         self.borrow_list_btn.grid(sticky=E+W)
         self.borrow_list_btn.bind('<Button-1>', self.gotoBorrowList)
 
-        self.borrow_form_btn = Button(self, text="Borrow")
-        self.borrow_form_btn.grid(sticky=E+W)
-        self.borrow_form_btn.bind('<Button-1>', self.gotoBorrowForm)
+        self.return_list_btn = Button(self, text="Book Return List")
+        self.return_list_btn.grid(sticky=E+W)
+        self.return_list_btn.bind('<Button-1>', self.gotoReturnList)
 
 
     def logout(self, event):

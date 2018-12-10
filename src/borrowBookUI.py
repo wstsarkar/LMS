@@ -26,7 +26,7 @@ class BorrowBookFrame(Frame):
         self.back_btn.bind('<Button-1>', self.back)
 
         self.logout_btn = Button(self, text="Logout")
-        self.logout_btn.grid(row=0, column=5 + (2 if self.container.isEmployee == True else 0), sticky=E)
+        self.logout_btn.grid(row=0, column=5 + (2 if self.container.isEmployee is True else 0), sticky=E)
         self.logout_btn.bind('<Button-1>', self.logout)
 
         row = 1
@@ -99,8 +99,6 @@ class BorrowBookFrame(Frame):
     def getMainGeometry(self):
         if self.container.isEmployee:
             return "450x400"
-        else:
-            return "420x400"
     def getMainTitle(self):
-        return "Book List"
+        return "Borrow Book"
 

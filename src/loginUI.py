@@ -67,6 +67,7 @@ class LoginFrame(Frame):
             for student in self.container.library.getAllStudent():
                 if student.getUserName().upper() == self.user_name_entry.get().upper() and student.getPassword() == self.password_entry.get():
                     self.clearForm()
+                    self.container.student = student
                     self.container.viewMenu(isEmp=False)
             self.message_lbl.config(text="Login Failed")
 

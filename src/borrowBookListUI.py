@@ -28,15 +28,17 @@ class BorrowBookListFrame(Frame):
 
         row = 1
 
-        self.add_book_btn = Button(self, text="Borrow Book")
-        self.add_book_btn.grid(row=1, column=0, sticky=W)
-        self.add_book_btn.bind('<Button-1>', self.gotoBorrowBook)
+        if self.container.isEmployee:
+            self.add_book_btn = Button(self, text="Borrow Book")
+            self.add_book_btn.grid(row=1, column=0, sticky=W)
+            self.add_book_btn.bind('<Button-1>', self.gotoBorrowBook)
         row = 2
 
         self.selectList = StringVar(self.master)
         self.selectList.trace('w', self.selectList_change)
         self.selectList.set('All List')
         list = ["All List", "Current List"]
+
         selectListOM = OptionMenu(self, self.selectList, *list)
         selectListOM.config(width=8)
         selectListOM.grid(row=row, column=0, sticky=W)
@@ -46,11 +48,13 @@ class BorrowBookListFrame(Frame):
         self.selectStudent.set('Select One')
 
         if self.container.isEmployee:
-            self.selectStudent.set('Select One')
             selectStudentOM = OptionMenu(self, self.selectStudent, *self.container.library.getStudentDropDown())
 
             selectStudentOM.config(width=10)
             selectStudentOM.grid(row=row, column=1, sticky=W)
+        else:
+            self.selectStudent.set(self.container.student.getNeme())
+
 
     def viewList(self):
         for widget in self.winfo_children():
@@ -120,9 +124,9 @@ class BorrowBookListFrame(Frame):
 
     def getMainGeometry(self):
         if self.container.isEmployee:
-            return "600x400"
+            return "700x400"
         else:
-            return "500x400"
+            return "600x400"
 
     def getMainTitle(self):
         return "Borrow Book List"

@@ -9,6 +9,7 @@ from bookListUI import *
 from bookUI import *
 from borrowBookListUI import *
 from borrowBookUI import *
+from returnBookListUI import *
 
 from library import *
 from user import *
@@ -33,6 +34,8 @@ class Container(object):
         self.root.title(self.library.getNeme())
 
         self.addFrame()
+
+        self.student = None
 
 
         self.show_frame("LoginFrame")
@@ -81,8 +84,8 @@ class Container(object):
     def viewBorrowForm(self):
         self.show_frame("BorrowBookFrame")
 
-    def viewReturnForm(self):
-        self.show_frame("UserFormFrame")
+    def viewReturnList(self):
+        self.show_frame("ReturnBookListFrame")
     def viewReturnForm(self):
         self.show_frame("UserFormFrame")
 
@@ -93,7 +96,7 @@ class Container(object):
 
         for F in (LoginFrame, MenuFrame, BookListFrame, BookFormFrame,
                   StudentFormFrame, UserFormFrame, StudentListFrame,UserListFrame, BorrowBookListFrame,
-                  BorrowBookFrame):
+                  BorrowBookFrame, ReturnBookListFrame):
             page_name = F.__name__
             frame = F(self.root, self)
             self.frames[page_name] = frame
